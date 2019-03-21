@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>记账</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+    <link href="__CSS__/foundation-datepicker.css" rel="stylesheet" type="text/css">
+</head>
+<body >
+    <div class="app-header">
+        <b>记账通</b>
+    </div>
+    <div class="container-fluid">
+        <!--记账内容头部-->
+        <div class="row myself-con-head text-center" >
+            <div><img src="__UPLOADS__<empty name="Userinfo.userpho">me.jpg<else />{$Userinfo.userpho}</empty> " class="img-circle"></div>
+            <div>{$Userinfo.nickname}</div>
+        </div>
+
+        <!--记账内容主体-->
+        <div class=" accountcon-main">
+            <div class="row">
+                <form class="form-horizontal" style="margin: 20px 10%;" action="__SELF__" method="post">
+                    <div class="form-group" >
+                        <label for="selectTypename" class="control-label">类  别：</label>
+                        <select class="form-control" id="selectTypename" name="big_type"  style="width: 100%;">
+                            <option value="1">收入</option>
+                            <option value="2" >支出</option>
+                            <option value="3">应收</option>
+                            <option value="4">应付</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">方  向：</label><br/>
+                        <div id="income">
+                            <volist name="inlist" id="vo" mod="5">
+                                <eq name="mod" value="0"><br/></eq>
+                                <label class="radio-inline">
+                                    <input type="radio" name="small_type" id="income{$i}" value="{$vo.id}"> {$vo.name}
+                                </label>
+                            </volist>
+                        </div>
+
+                        <div id="expend" style="display: none;">
+                            <volist name="outlist" id="vo" mod="5">
+                                <eq name="mod" value="0"><br/></eq>
+                                <label class="radio-inline">
+                                    <input type="radio" name="small_type" id="expend{$i}" value="{$vo.id}"> {$vo.name}
+                                </label>
+                            </volist>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputMoney" class="control-label">消  费：</label>
+                        <input type="number" class="form-control" id="inputMoney" name="money" placeholder="Money">
+                    </div>
+
+                    <div class="form-group" id="mydate" style="display: none;">
+                        <label for="inputDate" class="control-label">截止日期：</label>
+                        <input type="text" class="form-control" id="inputDate" name="end_time" value="" placeholder="Closing date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remark" class="control-label">备  注：</label>
+                        <textarea class="form-control" id="remark" name="remark" style="height: 100px;">
+
+                        </textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary" onclick="return checkAddAccount(this.form)">添加记账</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="app-bottom">
+            <ul class="nav nav-tabs">
+                <li ><a href="{:U('Index/index')}" >状态</a></li>
+                <li ><a href="{:U('Bill/index')}">账单</a></li>
+                <li class="active"><a href="{:U('Account/index')}">记账</a></li>
+                <li ><a href="{:U('Charts/index')}">图表</a></li>
+                <li ><a href="{:U('Myself/index')}">我的</a></li>
+            </ul>
+        </div>
+    </nav>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__//validate.js"></script>
+    <script src="__JS__//foundation-datepicker.js"></script>
+    <script src="__JS__//foundation-datepicker.zh-CN.js"></script>
+    <script>
+        $('#inputDate').fdatepicker();
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+        var checkin = $('#dpd1').fdatepicker({
+            onRender: function (date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.update(newDate);
+            }
+            checkin.hide();
+            $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').fdatepicker({
+            onRender: function (date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            checkout.hide();
+        }).data('datepicker');
+
+        $('#selectTypename').change(function () {
+            var type=$(this).val();
+            if(type=="1")
+                type="收入";
+            else if(type=="2")
+                type="支出";
+            else if(type=="3")
+                type="应收";
+            else if(type=="4")
+                type="应付";
+
+
+            if(type.search("收")!=-1){
+                $("#expend").hide();
+                $("#income").show();
+            }else {
+                $("#income").hide();
+                $("#expend").show();
+            }
+            if(type.search("应")!=-1){
+                $("#mydate").show();
+            }else{
+                $("#mydate").hide();
+            }
+        });
+    </script>
+</body>
+</html>

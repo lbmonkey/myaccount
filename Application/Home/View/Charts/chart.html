@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>图表</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+    <script src="__JS__/echarts.common.min.js"></script>
+</head>
+<body >
+    <div class="app-header">
+        <b>记账通</b>
+    </div>
+    <div class="container-fluid">
+        <!--图表内容头部-->
+        <div class="row mxcon-head chartcon-head" >
+            <div class="col-xs-4">
+                <div class="mxcon-head1">
+
+                    <button class="dropdown-toggle" type="button" id="dropdownMenu3" value="2019" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ff3501; padding-left: 0; border: none;">
+                        {$info.year}年
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3" style="min-width: 83%;">
+                        <li><a href="{:U('Charts/index')}?year=2018">2018年</a></li>
+                        <li><a href="{:U('Charts/index')}?year=2019">2019年</a></li>
+                        <li><a href="{:U('Charts/index')}?year=2020">2020年</a></li>
+                        <li><a href="{:U('Charts/index')}?year=2021">2021年</a></li>
+
+                    </ul>
+                </div>
+                <div class="mxcon-head2">
+                    <div style="border-right:1px solid gray; ">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ff3501; padding-left: 0; border: none;">
+                            {$info.month}月
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="min-width: 83%;">
+                            <li><a href="#" onclick="chooseMonth(1);">01月</a></li>
+                            <li><a href="#" onclick="chooseMonth(2);">02月</a></li>
+                            <li><a href="#" onclick="chooseMonth(3);">03月</a></li>
+                            <li><a href="#" onclick="chooseMonth(4);">04月</a></li>
+                            <li><a href="#" onclick="chooseMonth(5);">05月</a></li>
+                            <li><a href="#" onclick="chooseMonth(6);">06月</a></li>
+                            <li><a href="#" onclick="chooseMonth(7);">07月</a></li>
+                            <li><a href="#" onclick="chooseMonth(8);">08月</a></li>
+                            <li><a href="#" onclick="chooseMonth(9);">09月</a></li>
+                            <li><a href="#" onclick="chooseMonth(10);">10月</a></li>
+                            <li><a href="#" onclick="chooseMonth(11);">11月</a></li>
+                            <li><a href="#" onclick="chooseMonth(12);">12月</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="mxcon-head1">收入</div>
+                <div class="mxcon-head2">
+                    {$account.in}
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="mxcon-head1">支出</div>
+                <div class="mxcon-head2">
+                    {$account.out}
+                </div>
+            </div>
+        </div>
+        <!--图表内容主体-->
+        <div class=" chartcon-main row">
+            <!--<div id="mydata1" style="width: 100%;height:400px;"></div>-->
+            <div id="mydata3" style="width: 100%;height:400px;  <empty name="income">display:none; </empty>"></div><!--本月来源-->
+            <div id="mydata2" style="width: 100%;height:400px; <empty name="outcome">display:none; </empty>" ></div><!--本月消费-->
+            <div id="mydata4" style="width: 100%;height:400px; <empty name="mydata">display:none; </empty>"></div><!--本月来源-->
+        </div>
+
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="app-bottom">
+            <ul class="nav nav-tabs">
+                <li ><a href="{:U('Index/index')}" >状态</a></li>
+                <li ><a href="{:U('Bill/index')}">账单</a></li>
+                <li ><a href="{:U('Account/index')}">记账</a></li>
+                <li class="active"><a href="{:U('Charts/index')}">图表</a></li>
+                <li ><a href="{:U('Myself/index')}">我的</a></li>
+            </ul>
+        </div>
+    </nav>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+
+<script>
+    function chooseMonth(month) {
+        var year=$('#dropdownMenu3').val();
+        window.location.href="{:U('Charts/index')}?year="+year+"&&month="+month;
+    }
+
+    var myChart2 = echarts.init(document.getElementById('mydata2'));
+    myChart2.setOption({
+        title : {
+            text: '消费情况',
+            subtext: '{$info.year}年{$info.month}月',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        series : [
+            {
+                name: '消费去向',
+                type: 'pie',
+                radius: '55%',
+                data:[
+                <volist name="outcome" id="vo">
+                    { value:{$vo}, name:'{$key}' },
+                </volist>
+                ]
+            }
+        ]
+    })
+
+    var myChart3 = echarts.init(document.getElementById('mydata3'));
+    myChart3.setOption({
+        title : {
+            text: '收入情况',
+            subtext: '{$info.year}年{$info.month}月',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        series : [
+            {
+                name: '收入来源',
+                type: 'pie',
+                radius: '55%',
+                data:[
+                <volist name="income" id="vo">
+                    { value:{$vo}, name:'{$key}' },
+                </volist>
+                ]
+            }
+        ]
+    })
+
+    var myChart4 = echarts.init(document.getElementById('mydata4'));
+    myChart4.setOption({
+        title: {
+            text: '年度报表(元)',
+            subtext: '数据为{$info.year}年'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['收入', '支出']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            //data: ['1月','2月','3月','4月','5月','6月(元)']
+            data: [
+            <volist name="mydata" id="vo">
+             '{$key}月',
+            </volist>
+            ]
+        },
+        series: [
+            {
+                name: '收入',
+                type: 'bar',
+                data: [
+                <volist name="mydata" id="vo">
+                    <notempty name="vo['in']">
+                        {$vo.in}
+                        <else/>0
+                    </notempty>,
+                </volist>
+                ]
+            },
+            {
+                name: '支出',
+                type: 'bar',
+                data: [
+                <volist name="mydata" id="vo">
+                    <notempty name="vo['out']">
+                    {$vo.out}
+                    <else/>0
+                    </notempty>,
+                </volist>
+            ]
+            }
+        ]
+    })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="__JS__/jquery.js"></script>
+    <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body >
+<div class="container">
+    <div class="row text-left"style="padding-top: 30px;">
+        <table class="table">
+            <tr>
+                <td>用户头像</td>
+                <td><img style="width: 50px; height: 50px;" src="__UPLOADS__<empty name="info.userpho">me.jpg<else />{$info.userpho}</empty> " class="img-circle"/></td>
+            </tr>
+
+            <tr>
+                <td>用户昵称</td>
+                <td>{$info.nickname}</td>
+            </tr>
+            <tr>
+                <td>用户信息</td>
+                <td><b>电话号码：</b>{$info.phone}  <b>邮箱：</b>{$info.email}</td>
+            </tr>
+            <tr>
+                <td>时间和内容</td>
+                <td><b>时间：</b>{$info.time|date="Y-m-d h:i:s",###}  <br/><b>内容：</b>{$info.content}</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <a href="__CONTROLLER__/show_words" class="btn btn-primary">返回</a>
+            <a href="__CONTROLLER__/delete_words?id={$vo.id}" class="btn btn-default">删除</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

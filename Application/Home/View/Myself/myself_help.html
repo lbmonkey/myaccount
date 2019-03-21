@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>软件帮助</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+</head>
+<body >
+    <div class="app-header">
+        <b><a class="return_a" href="javascript:history.go(-1)">< 记账通</a></b>
+    </div>
+    <div class="container-fluid">
+        <!--我的头部-->
+        <div class="row myself-con-head text-center" >
+            <div><img src="__UPLOADS__<empty name="Userinfo.userpho">me.jpg<else />{$Userinfo.userpho}</empty> " class="img-circle"></div>
+            <div>{$Userinfo.nickname}</div>
+        </div>
+        <div class="row myself-con-tag text-center">
+            <div class="col-xs-4">
+                <div class="myself-con-tag1" id="mycard">{$Userinfo.usercard}</div>
+                <div class="myself-con-tag2">已连续打卡</div>
+            </div>
+            <div class="col-xs-4">
+                <div class="myself-con-tag1">{$Userinfo.age}</div>
+                <div class="myself-con-tag2">成长日龄</div>
+            </div>
+            <div class="col-xs-4">
+                <div class="myself-con-tag1">{$Userinfo.billnum}</div>
+                <div class="myself-con-tag2">总记账笔数</div>
+            </div>
+        </div>
+        <!--我的主体-->
+        <div class="row myselfhelp-con-main">
+            <!--软件帮助-->
+            <h4><b>| 软件信息</b></h4>
+            <p class="lead">{$info.message}</p>
+            <h4><b>| 使用帮助</b></h4>
+            <p class="lead">{$info.help}</p>
+        </div>
+
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="app-bottom">
+            <ul class="nav nav-tabs">
+                <li ><a href="{:U('Index/index')}" >状态</a></li>
+                <li ><a href="{:U('Bill/index')}">账单</a></li>
+                <li ><a href="{:U('Account/index')}">记账</a></li>
+                <li ><a href="{:U('Charts/index')}">图表</a></li>
+                <li class="active"><a href="{:U('Myself/index')}">我的</a></li>
+            </ul>
+        </div>
+    </nav>
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.min.js"></script>
+</body>
+</html>

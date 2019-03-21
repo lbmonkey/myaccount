@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>记账通记账详情</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+</head>
+<body >
+    <div class="app-header">
+        <b><a class="return_a" href="javascript:history.go(-1)">< 记账通</a></b>
+    </div>
+    <div class="container-fluid">
+        <!--详情内容头部-->
+        <div class="row detail-con-head text-center" >
+            <div style="z-index: 5;"><img src="__UPLOADS__<empty name="Userinfo.userpho">me.jpg<else />{$Userinfo.userpho}</empty> " class="img-circle"></div>
+            <div>{$bill_info.name}</div><!--类别--><!--类型为收入-->
+        </div>
+        <!--详情内容主体-->
+        <div class="row detail-con-main">
+            <table class="table table-striped" >
+                <tr>
+                    <td class="td-one"><b>类型</b></td>
+                    <td class="td-two">
+                        <if condition="$bill_info['big_type'] eq 1">收入
+                            <elseif condition="$bill_info['big_type'] eq 2"/>支出
+                            <elseif condition="$bill_info['big_type'] eq 3"/>应收
+                            <else/>应付
+                        </if>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-one"><b>金额</b></td>
+                    <td class="td-two">{$bill_info.money}</td>
+                </tr>
+                <tr>
+                    <td class="td-one"><b>日期</b></td>
+                    <td class="td-two">{$bill_info.create_time|date="Y年m月d日 星期N",###}</td>
+                </tr>
+                <tr>
+                    <td class="td-one"><b>备注</b></td>
+                    <td class="td-two">{$bill_info.remark}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="text-center">
+            <a class="btn btn-default" href="__CONTROLLER__/del_account?id={$bill_info.id}" onclick="if (confirm('确定删除该条记账信息吗？')) return true; else return false;">删除</a>
+        </div>
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="app-bottom">
+            <ul class="nav nav-tabs">
+                <li  class="active" ><a href="{:U('Index/index')}" >状态</a></li>
+                <li ><a href="{:U('Bill/index')}">账单</a></li>
+                <li ><a href="{:U('Account/index')}">记账</a></li>
+                <li ><a href="{:U('Charts/index')}">图表</a></li>
+                <li ><a href="{:U('Myself/index')}">我的</a></li>
+            </ul>
+        </div>
+    </nav>
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.min.js"></script>
+</body>
+</html>

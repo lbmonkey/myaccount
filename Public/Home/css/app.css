@@ -1,0 +1,179 @@
+body{
+    background-color: white;
+}
+/*页头*/
+.app-header{
+    width: 100%; height: auto; padding: 10px ; background-color: #ff3501; font-size: 2rem; color: #eaf9dd;
+}
+/*
+返回头部的logo标志的a标签*/
+.app-header .return_a{
+    color: #eaf9dd;text-decoration:none;font-size: 2rem;
+}
+
+/*底部导航栏*/
+.navbar{
+    background-color:  #ff3501; border: none;
+}
+.app-bottom{
+    padding: 0px; margin: 0px auto; color: #0f0f0f;
+}
+.app-bottom .nav-tabs{
+    border-bottom: none;
+}
+.app-bottom .nav-tabs li{
+    width: 20%; text-align: center;
+}
+.app-bottom .nav-tabs li a{
+    height: 50px; line-height: 25px; color:black;width: 100%; font-size: 15px;
+}
+
+/*
+登录注册头部*/
+.login-header{
+    margin-top: 10px; color: #B70005; font-size: 22px;text-align: center;
+}
+
+/*明细*/
+.mxcon-head{
+    background-color:  #ff3501; color: #0f0f0f;padding-top: 10px;
+}
+.mxcon-head1{
+    color: #5e5e5e; font-size: small; margin-bottom: 5px;
+}
+.mxcon-head2{
+    color: #0f0f0f; font-size: large;
+}
+.mxcon-main{
+    clear: both;margin-top: 20px; margin-bottom:60px ;
+}
+.mxcon-main .mxlist-head{
+    line-height: 35px; color: gray; font-size: small; border-bottom: 1px solid #a39ea9;
+}
+.mxcon-main .table .td-one{
+    width: 20%;
+}
+.mxcon-main .table .td-two{
+    width: 60%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+.table .td-three{
+    width: 20%;
+}
+#typetable .td-one{
+    width: 30%;
+}
+#typetable .two{
+    width: 50%;
+}
+#typetable .td-three{
+    width: 20%;
+}
+
+.typecon-main{
+    clear: both;margin-top: 20px; margin-bottom:60px ;
+}
+.typecon-main .table .td-one{
+    width: 20%;
+}
+.typecon-main .table .td-two{
+    width: 60%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+
+/*
+详情*/
+.detail-con-head{
+    padding-top: 2px; padding-bottom: 10px; background-color:  #ff3501;font-size: large;
+}
+.detail-con-head img{
+    width: 70px;height: 70px; margin-bottom: 8px;
+}
+.detail-con-main{
+    padding-top: 30px;
+}
+.detail-con-main .table .td-one{
+    width: 20%; text-align: center;
+}
+.detail-con-main .table .td-two{
+    width: 80%; text-align: left;
+}
+/*我的*/
+.myself-con-head{
+    padding-top: 2px; padding-bottom: 10px; background-color:  #ff3501;font-size: large;
+}
+.myself-con-head img{
+    width: 70px;height: 70px; margin-bottom: 8px;
+}
+.myself-con-main{
+    padding-top: 30px;
+}
+.myself-con-tag{
+    background-color:  #ff3501; padding-top: 10px;padding-bottom: 10px;
+}
+.myself-con-tag1{
+    color: #0f0f0f; font-size: 25px; font-weight:bold;
+}
+.myself-con-tag2{
+    color: white;font-size: small;
+}
+/*
+我的修改资料*/
+.myselfupd-con-main{
+    padding-top: 15px;
+    padding-bottom:60px ;
+}
+.myselfupd-con-main form{
+    margin: 0px 10%;
+}
+/*
+我的软件帮助*/
+.myselfhelp-con-main{
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom:60px ;
+}
+/*
+我的收支提醒*/
+.myselfreminder-con-main{
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom:60px ;
+}
+.myselfreminder-con-main .table .td-one{
+    width: 15%; color: #ff6a5e;
+}
+.myselfreminder-con-main .table .td-two{
+    width: 40%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+.myselfreminder-con-main .table .td-three{
+    text-align: right;
+}
+
+/*
+账单*/
+.billcon-head{
+    background-color: #ff3501;padding-top: 15px;padding-bottom: 15px;
+}
+.billcon-head .bill-news{
+   display: inline-block;padding: 4px;
+}
+.billcon-head .bill-news .bill-news1{
+    margin-right: 10px; color: #8b89f5;
+}
+.billcon-head .bill-news .bill-news2{
+   font-size: 20px;font-weight: bold;
+}
+#billcon-head-money{
+    font-weight: bold;font-size: 26px; padding-top: 15px; padding-bottom: 15px;
+}
+.billcon-main{
+    padding-bottom:60px ;
+}
+.accountcon-main{
+    padding-bottom:60px ;
+}
+
+/*图表*/
+.chartcon-main{
+    clear: both;margin-top: 20px; margin-bottom:60px ;
+}
+

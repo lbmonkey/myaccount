@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="__JS__/jquery.js"></script>
+    <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body >
+<div class="container">
+    <div class="row text-left">
+        <form role="form" action="__CONTROLLER__/edit_help" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="message" class="control-label">软件信息：</label>
+                <textarea class="form-control" id="message" name="message" style="height: 100px;">{$info.message}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="help" class="control-label">使用帮助：</label>
+                <textarea class="form-control" id="help" name="help" style="height: 100px;">{$info.help}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">编辑</button>
+            <a href="__SELF__" target="right" class="btn btn-default">取消</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的记账通</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+</head>
+<body >
+    <div class="app-header">
+        <b>记账通</b>
+    </div>
+    <div class="container-fluid">
+        <!--我的头部-->
+        <div class="row myself-con-head text-center" >
+            <div><img src="__UPLOADS__<empty name="Userinfo.userpho">me.jpg<else />{$Userinfo.userpho}</empty> " class="img-circle"></div>
+            <div>{$Userinfo.nickname}</div>
+        </div>
+        <div class="row myself-con-tag text-center">
+            <div class="col-xs-4">
+                <div class="myself-con-tag1" id="mycard">{$Userinfo.usercard}</div>
+                <div class="myself-con-tag2">已连续打卡</div>
+            </div>
+            <div class="col-xs-4">
+                <div class="myself-con-tag1">{$Userinfo.age}</div>
+                <div class="myself-con-tag2">成长日龄</div>
+            </div>
+            <div class="col-xs-4">
+                <div class="myself-con-tag1">{$Userinfo.billnum}</div>
+                <div class="myself-con-tag2">总记账笔数</div>
+            </div>
+        </div>
+        <!--我的主体-->
+        <div class="row myself-con-main">
+            <div class="list-group">
+                <a href="#" onclick="Punchcard()" type="button" class="list-group-item">点击打卡</a>
+                <a href="__CONTROLLER__/modifyData" type="button" class="list-group-item">修改资料</a>
+                <a href="__CONTROLLER__/addWords" type="button" class="list-group-item">用户反馈</a>
+                <a href="__CONTROLLER__/remender" type="button" class="list-group-item">收支提醒 <span class="badge">{$reminder_num}</span></a>
+                <a href="__CONTROLLER__/help" type="button" class="list-group-item">软件帮助</a>
+            </div>
+        </div>
+
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="app-bottom">
+            <ul class="nav nav-tabs">
+                <li ><a href="{:U('Index/index')}" >状态</a></li>
+                <li ><a href="{:U('Bill/index')}">账单</a></li>
+                <li ><a href="{:U('Account/index')}">记账</a></li>
+                <li ><a href="{:U('Charts/index')}">图表</a></li>
+                <li class="active"><a href="{:U('Myself/index')}">我的</a></li>
+            </ul>
+        </div>
+    </nav>
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.min.js"></script>
+    <script src="__JS__//validate.js"></script>
+    <script>
+        function Punchcard() {
+            $.post("__CONTROLLER__/punchcard",{ },function(result){
+                if(result.msg=='ok'){
+                    $('#mycard').text(result.usercard);
+                    alert('打卡成功！');
+                }else if(result.msg=='error')
+                    alert('系统繁忙，请稍后！');
+                else if(result.msg=='played')
+                    alert('今日已打卡，明天继续努力哦！');
+
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>记账通用户登录</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-header">
+        <b>记账通</b>
+    </div>
+    <div class="container-fluid">
+        <P class="login-header "><b>用户登录</b></P>
+        <div class="row">
+            <form class="form-horizontal" style="margin: 20px 10%;" action="__SELF__" method="post">
+                <div class="form-group">
+                    <label for="inputUsername" class="control-label">昵  称：</label>
+                    <input type="text" class="form-control" id="inputUsername" name="nickname" placeholder="Nickname">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="control-label">密  码：</label>
+                    <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" onclick="return checkLogin(this.form)">登录</button>
+                    <a href="__CONTROLLER__/regist" style="float: right; margin-top: 4%;">注册</a>
+                    <a href="__CONTROLLER__/reset_password" style="float: right; margin-top: 4%; margin-right: 5px;">忘记密码</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.min.js"></script>
+    <script src="__JS__/validate.js"></script>
+</body>
+</html>

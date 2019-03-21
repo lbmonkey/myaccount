@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+    <link rel="stylesheet" href="__CSS__/bootstrap.min.css">
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.min.js"></script>
+    <style>
+        #showpages a,span{padding: 6px; background-color: #b8b098; border: 1px solid gray;margin-right: 2px;}
+    </style>
+</head>
+<body>
+<div class="container-fuild">
+    <div class="row" style="padding-top: 15px;padding-bottom: 15px;">
+        <div class="col-sm-6" style="padding-left: 50px;">
+            <button class="dropdown-toggle btn" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <if condition="$info['big_type'] eq 1">收入
+                    <elseif condition="$info['big_type'] eq 2"/>支出
+                    <elseif condition="$info['big_type'] eq 3"/>应收
+                    <else/>应付
+                </if>
+                >
+            </button>
+            <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu4" >
+                <li><a href="{:U('Index/showsmall_type')}?big_type=1">收入</a></li>
+                <li><a href="{:U('Index/showsmall_type')}?big_type=2">支出</a></li>
+
+            </ul>
+
+        </div>
+        <div class="col-sm-6 text-right" style="padding-right: 50px;">
+            <a class="btn btn-primary" href="{:U('Index/add_type')}">添加类别</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered ">
+                <tr class="text-center">
+                    <td>序号</td>
+                    <td>名称</td>
+                    <td>注册时间</td>
+                    <td>操作</td>
+                </tr>
+                <volist name="type_list" id="vo">
+                    <tr class="text-center">
+                        <td>{$i}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.time|date="Y-m-d h:i:s",###}</td>
+                        <td><a href="__CONTROLLER__/delete_type?id={$vo.id}">删除</a></td>
+                    </tr>
+                </volist>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div id="showpages" aria-label="Page navigation" style="text-align: center;">
+            {$page}
+        </div>
+    </div>
+</div>
+<script>
+</script>
+</body>
+</html>

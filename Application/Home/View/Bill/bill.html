@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>账单</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+</head>
+<body >
+    <div class="app-header">
+        <b>记账通</b>
+    </div>
+
+    <div class="container-fluid">
+        <!--账单内容头部-->
+        <div class="row billcon-head">
+            <div class="text-center col-xs-12">
+                <span style="float: left;">
+                    <div>
+                        <button class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ff3501; padding-left: 0; border: none;">
+                            {$myaccount.year}年
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li><a href="{:U('Bill/index')}?year=2019">2019年</a></li>
+                            <li><a href="{:U('Bill/index')}?year=2020">2020年</a></li>
+                            <li><a href="{:U('Bill/index')}?year=2021">2021年</a></li>
+                            <li><a href="{:U('Bill/index')}?year=2022">2022年</a></li>
+                        </ul>
+                    </div>
+                </span>
+                <span style="margin-right: 20%; color: #8b89f5;">结余</span>
+            </div>
+            <div class="col-xs-12 text-center" id="billcon-head-money">{$myaccount['in'] - $myaccount['out']}</div>
+            <div class="col-xs-12 text-center">
+                <span class="bill-news" style="border-right: 1px solid black; padding-right: 10px;">
+                    <span class="bill-news1">收入</span>
+                    <span class="bill-news2">{$myaccount.in}</span>
+                </span>
+                <span class="bill-news" style="padding-left: 6px;">
+                    <span class="bill-news1">支出</span>
+                    <span class="bill-news2">{$myaccount.out}</span>
+                </span>
+            </div>
+        </div>
+        <!--明细内容主体-->
+        <div class=" billcon-main row text-center ">
+            <table class="table table-striped">
+                <tr>
+                    <td>月份</td>
+                    <td>收入</td>
+                    <td>支出</td>
+                    <td>结余</td>
+                </tr>
+                <volist name="mydata" id="vo">
+                    <tr>
+                        <td>{$key}月</td>
+                        <td><empty name="vo['in']">0<else />{$vo.in}</empty></td>
+                        <td><empty name="vo['out']">0<else />{$vo.out}</empty></td>
+                        <td><?php if(($vo['in'] - $vo['out']) == false) echo 0; else echo $vo['in'] - $vo['out'];?></empty></td>
+                    </tr>
+                </volist>
+            </table>
+        </div>
+
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="app-bottom">
+            <ul class="nav nav-tabs">
+                <li ><a href="{:U('Index/index')}" >状态</a></li>
+                <li class="active"><a href="{:U('Bill/index')}">账单</a></li>
+                <li ><a href="{:U('Account/index')}">记账</a></li>
+                <li ><a href="{:U('Charts/index')}">图表</a></li>
+                <li ><a href="{:U('Myself/index')}">我的</a></li>
+            </ul>
+        </div>
+    </nav>
+    <script src="__JS__/jquery.min.js"></script>
+    <script src="__JS__/bootstrap.min.js"></script>
+</body>
+</html>

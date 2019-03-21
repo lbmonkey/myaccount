@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>记账通用户注册</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-header">
+        <b>记账通</b>
+    </div>
+    <div class="container-fluid">
+        <P class="login-header"><b>用户注册</b></P>
+        <div class="row">
+            <form class="form-horizontal" style="margin: 20px 10%;" action="__SELF__" method="post">
+
+                <div class="form-group">
+                    <label for="inputUsername" class="control-label">昵  称：</label>
+                    <input type="text" class="form-control" id="inputUsername" name="nickname" placeholder="Nickname">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label">邮  箱：</label>
+                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="inputPhone" class="control-label">电  话：</label>
+                    <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="Phone">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword1" class="control-label">密  码：</label>
+                    <input type="password" class="form-control" id="inputPassword1" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword2" class="control-label">确认密码：</label>
+                    <input type="password" class="form-control" id="inputPassword2" name="repassword" placeholder="Confirm password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" onclick="return checkRegist(this.form)">注册</button>
+                    <!--<a class="btn btn-default" href="#">忘记</a>-->
+                    <a href="__CONTROLLER__/login" style="float: right; margin-top: 4%;">去登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/validate.js"></script>
+</body>
+</html>

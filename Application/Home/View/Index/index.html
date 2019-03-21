@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>记账通首页</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/app.css" rel="stylesheet">
+</head>
+<body >
+    <div class="app-header">
+        <b>记账通</b>
+    </div>
+    <div class="container-fluid">
+        <!--选择按照什么查询-->
+        <div class="row">
+            <div class="col-xs-12" style="background-color: #ff3501; font-size: large; font-weight: bold;">
+                <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="line-height:40px;width:98%;background-color: #ff3501; padding-left: 0; border: none;">
+                    按<if condition="$info['tag'] eq 'date'">日期 <else/>类型</if>
+                </button>
+                <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu1" style="width: 100%;">
+                    <li onclick="chooseType(1)" style="line-height: 30px;">按日期</li>
+                    <li onclick="chooseType(2)" style="line-height: 30px;">按类别</li>
+                </ul>
+            </div>
+        </div>
+
+        <!--按照类型-->
+        <div id="mytype" style="<?php if($info['tag']=='date') echo 'display: none;'; ?>">
+            <div class="typecon-head row">
+                <div class="col-xs-12" style="background-color: #ff3501; font-size: large; font-weight: bold;">
+                    <button class="dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="line-height:40px;width:98%;background-color: #ff3501; padding-left: 0; border: none;">
+                        <if condition="$info['big_type'] eq 1">收入
+                            <elseif condition="$info['big_type'] eq 2"/>支出
+                            <elseif condition="$info['big_type'] eq 3"/>应收
+                            <else/>应付
+                        </if>
+                    </button>
+                    <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu4" style="width: 100%;">
+                        <li><a href="{:U('Index/index')}?tag=type&&big_type=1">收入</a></li>
+                        <li><a href="{:U('Index/index')}?tag=type&&big_type=2">支出</a></li>
+                        <li><a href="{:U('Index/index')}?tag=type&&big_type=3">应收</a></li>
+                        <li><a href="{:U('Index/index')}?tag=type&&big_type=4">应付</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="typecon-main">
+                <div class="row">
+                    <table class="table" id="typetable" style="table-layout:fixed">
+                        <tr>
+                            <td class="td-one">时间</td>
+                            <td class="td-two">去向+备注</td>
+                            <td class="td-three">金额</td>
+                        </tr>
+                        <volist name="mytypedata" id="vo">
+                            <tr>
+                                <td class="td-one"><b>{$vo.create_time|date="m-d H:i",###}</b></td>
+                                <td class="td-two"><b>{$vo.name}</b>:{$vo.remark}</td>
+                                <td class="td-three"><a href="{:U('Index/details')}?id={$vo.id}&&type={$vo.name}">{$vo.money}</a></td>
+                            </tr>
+                        </volist>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--按照日期-->
+        <div id="mydate" style="<?php if($info['tag']=='type') echo 'display: none;'; ?>">
+            <!--明细内容头部-->
+            <div class="row mxcon-head" >
+                <div class="col-xs-4">
+                    <div class="mxcon-head1">
+
+                        <button class="dropdown-toggle" type="button" id="dropdownMenu3" value="2019" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ff3501; padding-left: 0; border: none;">
+                            {$info.year}年
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu3" style="min-width: 83%;">
+                            <li><a href="{:U('Index/index')}?tag=date&&year=2018">2018年</a></li>
+                            <li><a href="{:U('Index/index')}?tag=date&&year=2019">2019年</a></li>
+                            <li><a href="{:U('Index/index')}?tag=date&&year=2020">2020年</a></li>
+                            <li><a href="{:U('Index/index')}?tag=date&&year=2021">2021年</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="mxcon-head2">
+                        <div style="border-right:1px solid gray; ">
+                            <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ff3501; padding-left: 0; border: none;">
+                                {$info.month}月
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="min-width: 83%;">
+                                <li><a href="#" onclick="chooseMonth(1);">01月</a></li>
+                                <li><a href="#" onclick="chooseMonth(2);">02月</a></li>
+                                <li><a href="#" onclick="chooseMonth(3);">03月</a></li>
+                                <li><a href="#" onclick="chooseMonth(4);">04月</a></li>
+                                <li><a href="#" onclick="chooseMonth(5);">05月</a></li>
+                                <li><a href="#" onclick="chooseMonth(6);">06月</a></li>
+                                <li><a href="#" onclick="chooseMonth(7);">07月</a></li>
+                                <li><a href="#" onclick="chooseMonth(8);">08月</a></li>
+                                <li><a href="#" onclick="chooseMonth(9);">09月</a></li>
+                                <li><a href="#" onclick="chooseMonth(10);">10月</a></li>
+                                <li><a href="#" onclick="chooseMonth(11);">11月</a></li>
+                                <li><a href="#" onclick="chooseMonth(12);">12月</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="mxcon-head1">收入</div>
+                    <div class="mxcon-head2">
+                        {$account.in}
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="mxcon-head1">支出</div>
+                    <div class="mxcon-head2">
+                        {$account.out}
+                    </div>
+                </div>
+            </div>
+            <!--明细内容主体-->
+            <div class=" mxcon-main">
+
+                <volist name="mydata" id="vo">
+                    <div>
+                        <div class="row mxlist-head">
+                            <!--<div class="col-xs-5">02月27日  星期三</div>-->
+                            <div class="col-xs-5"><?php echo date('m月d日  星期N',$mydaydata[$key]['create_time']); ?></div>
+
+                            <div class="col-xs-7"><span>收入: <?php if($mydaydata[$key]['in']) echo $mydaydata[$key]['in']; else echo 0; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>支出: <?php if($mydaydata[$key]['out']) echo $mydaydata[$key]['out']; else echo 0; ?></span></div>
+                        </div>
+                        <div class="row">
+                            <table class="table" style="table-layout:fixed">
+                                <volist name="vo" id="item">
+                                    <tr>
+                                        <td class="td-one"><b>{$item.name}</b></td>
+                                        <td class="td-two">{$item.remark}</td>
+                                        <td class="td-three"><a href="{:U('Index/details')}?id={$item.id}&&type={$item.name}">{$item.tag}{$item.money}</a></td>
+                                    </tr>
+                                </volist>
+                            </table>
+                        </div>
+                    </div>
+                </volist>
+
+            </div>
+        </div>
+    </div>
+    <nav class="navbar  navbar-fixed-bottom">
+        <div class="app-bottom">
+            <ul class="nav nav-tabs">
+                <li  class="active" ><a href="{:U('Index/index')}" >状态</a></li>
+                <li ><a href="{:U('Bill/index')}">账单</a></li>
+                <li ><a href="{:U('Account/index')}">记账</a></li>
+                <li ><a href="{:U('Charts/index')}">图表</a></li>
+                <li ><a href="{:U('Myself/index')}">我的</a></li>
+            </ul>
+        </div>
+    </nav>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script>
+    function chooseType(id) {
+        //按照日期
+        if(id==1) {
+            $("#dropdownMenu1").text("按日期");
+            $("#mytype").hide();
+            $("#mydate").show();
+        }
+        //按照类型
+        if(id==2){
+            $("#dropdownMenu1").text('按类型');
+            $("#mydate").hide();
+            $("#mytype").show();
+        }
+        return true;
+    }
+
+    function chooseMonth(month) {
+        var year=$('#dropdownMenu3').val();
+        window.location.href="{:U('Index/index')}?tag=date&&year="+year+"&&month="+month;
+    }
+
+</script>
+</body>
+</html>
